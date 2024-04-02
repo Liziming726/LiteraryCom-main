@@ -31,3 +31,36 @@ body {
     text-wrap: balance;
   }
 }
+
+/* 让主文字竖排 */
+.center{
+  flex-direction: column;
+}
+
+/* 描述文字 */
+.desc{
+  display: block;
+  text-align: right;
+  animation: randomAppearance 5s infinite;
+}
+
+@keyframes randomAppearance {
+  0%, 100% {
+    clip-path: inset(0 0 0 0);
+  }
+  16.67% {
+    clip-path: inset(0 100% 0 0); /* Disappear */
+  }
+  33.33% {
+    clip-path: inset(0 0 0 50%); /* Appear from left */
+  }
+  50% {
+    clip-path: inset(0 50% 0 0); /* Appear from right */
+  }
+  66.67% {
+    clip-path: inset(0); /* Fully appear */
+  }
+  83.33% {
+    clip-path: inset(0 50% 0 50%); /* Appear from middle */
+  }
+}
