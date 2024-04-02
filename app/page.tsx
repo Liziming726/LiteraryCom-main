@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import Recite from "./Recite";
+import Recite from "./pages/Recite";
 
 export default function Home() {
   return (
@@ -47,15 +47,6 @@ export default function Home() {
 
       {/* logo部分,决定去除logo，改为汉字 */}
       <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        {/* <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert apple-style-border"
-          // src="/assets/main.svg"
-          src="/assets/main.jpg"
-          alt="孤烟暮雪"
-          width={260}
-          height={37}
-          priority
-        /> */}
         <h1 className="text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-br from-gray-800 to-gray-900 dark:from-gray-100 dark:to-gray-200 dark:text-gray-900">
           孤烟暮雪
         </h1>
