@@ -1,8 +1,18 @@
 "use client";
 import { useState, useEffect } from "react";
 
+// Define a TypeScript interface for the question structure based on the database schema
+interface Question {
+  question: string;
+  optiona: string;
+  optionb: string;
+  optionc: string;
+  optiond: string;
+}
+
 function ReciteQuestions() {
-  const [questions, setQuestions] = useState([]);
+  // Use the Question interface to type the questions state
+  const [questions, setQuestions] = useState<Question[]>([]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
