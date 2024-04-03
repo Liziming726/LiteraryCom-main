@@ -1,0 +1,3 @@
+- localhost:3000/api/add-question?question=提倡文章合为时而著,歌诗合为事而作的唐代诗人是谁&optionA=韩愈&optionB=柳宗元&optionC=白居易&optionD=王安石&correctoptiona=错误&correctoptionb=错误&correctoptionc=正确&correctoptiond=错误&contentA=null&contentB=null&contentC=null&contentD=null&explanation=白居易和元稹共同提倡新乐府运动,提出文章应该为时而著作,歌诗应该为现实而作
+
+- localhost:3000/api/add-question?question=我国古典戏剧《西厢记》的女主人公是&optionA=崔莺莺&optionB=杜丽娘&optionC=李香君&optionD=杨玉环&correctoptiona=正确&correctoptionb=错误&correctoptionc=错误&correctoptiond=错误&contentA=崔莺莺出自《西厢记》&contentB=杜丽娘出自《牡丹亭》&contentC=李香君出自《桃花扇》&contentD=杨玉环出自《长生殿》&explanation=《西厢记》是元代戏剧家王实甫创作的一部古代传奇戏剧,崔莺莺是《西厢记》的女主人公
