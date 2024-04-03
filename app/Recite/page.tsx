@@ -44,7 +44,7 @@ function ReciteQuestions() {
           ))}
         </ul>
       ) : (
-        <p>No questions available.</p>
+        <p>😜等等等等等等等~马上就来~.</p>
       )}
     </div>
   );
