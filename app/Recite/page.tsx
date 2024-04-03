@@ -1,48 +1,127 @@
 "use client";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
-// Define a TypeScript interface for the question structure based on the database schema
+import { Button, Divider } from "antd";
+import type { ConfigProviderProps } from "antd";
+
+type SizeType = ConfigProviderProps["componentSize"];
+
 interface Question {
   question: string;
-  optiona: string;
-  optionb: string;
-  optionc: string;
-  optiond: string;
+  optiona?: string;
+  optionb?: string;
+  optionc?: string;
+  optiond?: string;
+  correctOption: string;
+  contenta?: string;
+  contentb?: string;
+  contentc?: string;
+  contentd?: string;
+  explanation: string;
+}
+
+interface QuestionWithDynamicOptions extends Question {
+  [key: string]: string | undefined;
 }
 
 function ReciteQuestions() {
-  // Use the Question interface to type the questions state
-  const [questions, setQuestions] = useState<Question[]>([]);
+  const [questions, setQuestions] = useState<QuestionWithDynamicOptions[]>([]);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+
+  const [size, setSize] = useState<SizeType>("large");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      // Client-side-only code
-      fetch("/api/sel-question")
+      fetch("/api/sel-topic")
         .then((response) => response.json())
         .then((data) => {
-          console.log("Fetched questions:", data.question.rows); // Log fetched data to the console
-          setQuestions(data.question.rows); // Assuming the data structure includes a 'rows' field containing the questions
+          console.log("Fetched questions:", data.question.rows);
+          setQuestions(data.question.rows);
         })
         .catch((error) => console.error("Error fetching questions:", error));
     }
   }, []);
 
+  const handleOptionSelect = (optionKey: string) => {
+    const currentQuestion = questions[currentQuestionIndex];
+    setSelectedOption(optionKey);
+  };
+
+  const handleNextQuestion = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setSelectedOption(null);
+    }
+  };
+
   return (
     <div>
       {questions.length > 0 ? (
-        <ul>
-          {questions.map((question, index) => (
-            <li key={index}>
-              <h1 className="text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-br from-gray-800 to-gray-900 dark:from-gray-100 dark:to-gray-200 dark:text-gray-900">
-                {question.question}
-              </h1>
-              <code className="font-mono font-bold">{question.optiona}</code>
-              <h2 className="text-2xl font-semibold">{question.optionb}</h2>
-              <h2 className="text-2xl font-semibold">{question.optionc}</h2>
-              <h2 className="text-2xl font-semibold">{question.optiond}</h2>
-            </li>
-          ))}
-        </ul>
+        <div>
+          <h1 className="text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-br from-gray-800 to-gray-900 dark:from-gray-100 dark:to-gray-200 dark:text-gray-900">
+            <Image
+              src="/assets/question.svg"
+              width={30}
+              height={30}
+              alt="?"
+              className="w-4 h-4 inline-block question"
+            />
+            {questions[currentQuestionIndex].question}
+          </h1>
+          {["optiona", "optionb", "optionc", "optiond"].map((optionKey) => {
+            const optionValue =
+              questions[currentQuestionIndex][
+                optionKey as keyof QuestionWithDynamicOptions
+              ];
+            return (
+              optionValue && (
+                <div className="center">
+                  <Button
+                    className="mt-4 text-xl btn"
+                    block
+                    key={optionKey}
+                    onClick={() => handleOptionSelect(optionKey)}
+                    size={size}
+                  >
+                    {optionValue}
+                  </Button>
+                </div>
+              )
+            );
+          })}
+          {selectedOption && (
+            <div>
+              <Divider orientation="right">解析</Divider>
+              <h3 className="explanation">
+                A: {questions[currentQuestionIndex].contenta}
+              </h3>
+              <h3 className="explanation">
+                B: {questions[currentQuestionIndex].contentb}
+              </h3>
+              <h3 className="explanation">
+                C: {questions[currentQuestionIndex].contentc}
+              </h3>
+              <h3 className="explanation">
+                D: {questions[currentQuestionIndex].contentd}
+              </h3>
+              <Divider></Divider>
+              <h3>
+                解释:
+                <p className="explanation">
+                  {questions[currentQuestionIndex].explanation}
+                </p>
+              </h3>
+              <button
+                onClick={handleNextQuestion}
+                className="p-2 mt-4 text-xl font-bold"
+              >
+                Next Question
+              </button>
+            </div>
+          )}
+        </div>
       ) : (
         <p>😜等等等等等等等~马上就来~.</p>
       )}
@@ -53,7 +132,7 @@ function ReciteQuestions() {
 export default function Recite() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-8">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
+      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex1">
         <ReciteQuestions />
       </div>
     </main>

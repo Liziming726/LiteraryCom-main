@@ -64,3 +64,37 @@ body {
     clip-path: inset(0 50% 0 50%); /* Appear from middle */
   }
 }
+
+.question{
+  width: 30px;
+  height: 30px;
+}
+
+.center{
+  /* 偏左 */
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  height: 8vh;
+}
+
+.btn{
+  height: 50px;
+  backdrop-filter: blur(5px); /* Frosted glass effect */
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 2.3s;
+  display: flex;
+  flex-direction: column-reverse;
+  font-size: 1.2rem;
+}
+.btn:hover{
+  background-color: #f0f0f0;
+}
+.explanation{
+  /* 高亮展示解释 */
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  padding: 10px;
+}

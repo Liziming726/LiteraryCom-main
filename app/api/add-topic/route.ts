@@ -8,10 +8,7 @@ export async function GET(request: Request) {
   const optionB = searchParams.get('optionB');
   const optionC = searchParams.get('optionC');
   const optionD = searchParams.get('optionD');
-  const correctoptiona = searchParams.get('correctoptiona'); // Added correctOption parameter
-  const correctoptionb = searchParams.get('correctoptionb'); // Added correctOption parameter
-  const correctoptionc = searchParams.get('correctoptionc'); // Added correctOption parameter
-  const correctoptiond = searchParams.get('correctoptiond'); // Added correctOption parameter
+  const correctOption = searchParams.get('correctOption');
   const contentA = searchParams.get('contentA');
   const contentB = searchParams.get('contentB');
   const contentC = searchParams.get('contentC');
@@ -21,11 +18,11 @@ export async function GET(request: Request) {
  
   try {
     if (!question) throw new Error('Question is required');
-    await sql`INSERT INTO question (question, optionA, optionB, optionC, optionD, correctoptiona,correctoptionb,correctoptionc,correctoptiond, contentA, contentB, contentC, contentD, explanation) VALUES (${question}, ${optionA}, ${optionB}, ${optionC}, ${optionD}, ${correctoptiona},${correctoptionb},${correctoptionc},${correctoptiond}, ${contentA}, ${contentB}, ${contentC}, ${contentD}, ${explanation} );`;
+    await sql`INSERT INTO topic (question, optionA, optionB, optionC, optionD, correctOption, contentA, contentB, contentC, contentD, explanation) VALUES (${question}, ${optionA}, ${optionB}, ${optionC}, ${optionD}, ${correctOption}, ${contentA}, ${contentB}, ${contentC}, ${contentD}, ${explanation} );`;
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
   }
  
-  const questions = await sql`SELECT * FROM question;`;
+  const questions = await sql`SELECT * FROM topic;`;
   return NextResponse.json({ questions }, { status: 200 });
 }
