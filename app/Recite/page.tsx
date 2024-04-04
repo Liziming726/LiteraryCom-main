@@ -5,6 +5,9 @@ import Image from "next/image";
 import { Button, Divider } from "antd";
 import type { ConfigProviderProps } from "antd";
 
+import { ArrowLeftOutlined, SyncOutlined } from '@ant-design/icons';
+import { FloatButton } from 'antd';
+
 type SizeType = ConfigProviderProps["componentSize"];
 
 interface Question {
@@ -134,6 +137,12 @@ export default function Recite() {
     <main className="flex min-h-screen flex-col items-center justify-between p-8">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex1">
         <ReciteQuestions />
+
+        <FloatButton.Group shape="square" style={{ right: 24 }}>
+          <FloatButton icon={<SyncOutlined />} onClick={() => window.location.reload()} />
+          <FloatButton.BackTop visibilityHeight={0} />
+          <FloatButton  icon={<ArrowLeftOutlined />} onClick={() => window.history.back()} />
+        </FloatButton.Group>
       </div>
     </main>
   );
