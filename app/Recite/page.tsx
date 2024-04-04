@@ -56,6 +56,9 @@ function ReciteQuestions() {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setSelectedOption(null);
+    } else {
+      setCurrentQuestionIndex(0); // Reset to the first question if reached the end
+      setSelectedOption(null);
     }
   };
 
